@@ -123,9 +123,6 @@ if [ "$SKIP_COUNTING" = true ] && [ -f "$GENOME_INPUT" ] && [ ! -z "$OUTPUT_DIR"
     mv "$FAKE_FASTQ" "$OUTPUT_DIR/$FAKE_FASTQ"
     fi
 
-    echo "Calculating max sequence length"
-    MAX_LENGTH=$(awk -F'\t' -v col="2" '{ if ($col > max) max = $col } END { print max }' "Genome_sizes.tsv")
-    ROUNDED_MAX_LENGTH=$(echo "scale=0; ((($MAX_LENGTH + 99) / 100) * 100)" | bc)
 
     echo "Indexing the genome"
     samtools faidx $GENOME
@@ -135,6 +132,10 @@ if [ "$SKIP_COUNTING" = true ] && [ -f "$GENOME_INPUT" ] && [ ! -z "$OUTPUT_DIR"
     fi
 
     cut -f1,2 $OUTPUT_DIR/$GENOME_INDEX > $OUTPUT_DIR/Genome_sizes.tsv
+
+    echo "Calculating max sequence length"
+    MAX_LENGTH=$(awk -F'\t' -v col="2" '{ if ($col > max) max = $col } END { print max }' "Genome_sizes.tsv")
+    ROUNDED_MAX_LENGTH=$(echo "scale=0; ((($MAX_LENGTH + 99) / 100) * 100)" | bc)
 
     if [ "$SKIP_COUNTING" = false ]; then
 
