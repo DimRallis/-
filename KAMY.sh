@@ -158,7 +158,7 @@ if [ "$CHECK" = true ]; then
         MALE_READ_1=$OUTPUT_DIR/male_read_1
         MALE_READ_2=$OUTPUT_DIR/male_read_2
         FEMALE_READ_1=$OUTPUT_DIR/female_read_1
-        FEMALE_READ_1=$OUTPUT_DIR/female_read_1
+        FEMALE_READ_2=$OUTPUT_DIR/female_read_2
 
 
           echo "Splitting input read files into smaller chunks"
